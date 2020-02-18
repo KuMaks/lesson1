@@ -11,7 +11,7 @@ def main():
     mybot = Updater(settings.API_KEY, request_kwargs=settings.PROXY)
     dp = mybot.dispatcher
     dp.add_handler(CommandHandler("start", greet_user))
-    dp.add_handler(Filters.text, talk_to_me)
+    dp.add_handler(MessageHandler(Filters.text, talk_to_me))
     mybot.start_polling()
     mybot.idle()
 
