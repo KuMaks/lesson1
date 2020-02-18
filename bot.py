@@ -1,19 +1,17 @@
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import logging
+import settings
 
 logging.basicConfig(format='%(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO,
                     filename='bot.log'
                     )
 
-PROXY = {'proxy_url': 'socks5://t1.learn.python.ru:1080',
-    'urllib3_proxy_kwargs': {'username': 'learn', 'password': 'python'}}
-
 def main():
-    mybot = Updater("1045620236:AAGgIEIygAhomQvpzqepg_rHKbIUm_mhWmI", request_kwargs=PROXY)
+    mybot = Updater(settings.API_KEY, request_kwargs=settings.PROXY)
     dp = mybot.dispatcher
     dp.add_handler(CommandHandler("start", greet_user))
-    dp.add_handler(Filters.text, talk_to_my)
+    dp.add_handler(Filters.text, talk_to_me)
     mybot.start_polling()
     mybot.idle()
 
